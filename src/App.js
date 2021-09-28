@@ -1,31 +1,22 @@
 import './App.css';
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
-import Chart from './components/Chart/Chart';
+import StockChart from './components/Chart/StockChart';
 import FinancialDetails from './components/FinancialDetails/FinancialDetails';
-import SearchBox from './components/SearchBox';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      searchField: '',
-    };
+    this.state = {};
   }
-
-  onSearchChange = (event) => {
-    this.setState({ searchField: event.target.value });
-    console.log(event.target.value);
-  };
-
   render() {
-    const { searchField } = this.state;
     return (
-      <div className="App">
+      <div className="App flex">
         <Navigation />
-        <SearchBox searchChange={this.onSearchChange} />
-        <Chart getDailyChart={this.getDailyChart} searchField={searchField} />
-        <FinancialDetails />
+        <div className="flex">
+          <StockChart />
+          <FinancialDetails />
+        </div>
       </div>
     );
   }

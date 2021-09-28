@@ -1,7 +1,7 @@
 import React from 'react';
 
 function FinancialDetails() {
-  return <div>HELLO WORLD</div>;
+  return <div className="ba">Financial Details</div>;
 }
 
 export default FinancialDetails;
