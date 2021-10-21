@@ -16,51 +16,65 @@ function Trending() {
         .then((response) => response.json())
         .then((data) => {
           if (data.length > 0) {
-            console.log(data);
             switch (fintwit) {
               case 'stocktwits':
-                setStockTwits(data);
+                getStockData(data).then((response) => setStockTwits(response));
                 break;
               case 'reddit':
-                setReddit(data);
+                getStockData(data).then((response) => setReddit(response));
                 break;
               case 'twitter':
-                setTwitter(data);
+                getStockData(data).then((response) => setTwitter(response));
                 break;
               default:
-                setReddit(data);
+                getStockData(data).then((response) => setReddit(response));
                 break;
             }
           }
         });
     };
 
-    const getStockData = async (array) => {
-      for (const ticker in array) {
-        return await fetch(`http://localhost:3000//search/${ticker}`, {
+    const getStockData = (array) => {
+      let tempArray = [];
+      for (let i = 0; i < array.length; i++) {
+        return fetch(`http://localhost:3000/quote/${array[i]}`, {
           method: 'get',
           headers: { 'Content-Type': 'application/json' },
         })
-          .then((response) => response.json)
+          .then((response) => response.json())
           .then((data) => {
-            return data;
+            let obj = {};
+            obj['symbol'] = array[i];
+            obj['company'] = data['Global Quote']['01. symbol'];
+            obj['price'] = data['Global Quote']['05. price'];
+            obj['change'] = data['Global Quote']['09. change'];
+            obj['changePercentage'] =
+              data['Global Quote']['10. change percent'];
+            obj['volume'] = data['Global Quote']['06. volume'];
+            console.log(obj);
+            tempArray.push(obj);
+            console.log(tempArray);
           });
       }
+      return tempArray;
     };
 
-    getTrending('stocktwits');
+    // getTrending('stocktwits')
+    //   .then(getStockData(stocktwits))
+    //   .then((data) => setStockTwits(data));
     getTrending('reddit');
-    getTrending('twitter');
-    console.log(getStockData(['TSLA']));
+    // getTrending('twitter')
+    //   .then(getStockData(twitter))
+    //   .then((data) => setTwitter(data));
   }, []);
 
   const getState = (fintwit) => {
     if (fintwit === 'stocktwits') {
-      console.log(stocktwits.slice(0, 14));
+      console.log(stocktwits);
     } else if (fintwit === 'reddit') {
-      console.log(reddit.slice(0, 14));
+      console.log(reddit);
     } else {
-      console.log(twitter.slice(0, 14));
+      console.log(twitter);
     }
   };
   return (
@@ -89,7 +103,6 @@ function Trending() {
                 <th>Change</th>
                 <th>% Change</th>
                 <th>Volume</th>
-                <th>Market Cap</th>
               </thead>
               <tbody>
                 {reddit ? (
@@ -97,21 +110,21 @@ function Trending() {
                     .slice(0, 14)
                     .map(
                       ({
+                        symbol,
                         company,
                         price,
                         change,
-                        changePercent,
+                        changePercentage,
                         volume,
-                        marketCap,
                       }) => {
                         return (
                           <tr>
+                            <td>{symbol}</td>
                             <td>{company}</td>
                             <td>{price}</td>
                             <td>{change}</td>
-                            <td>{changePercent}</td>
+                            <td>{changePercentage}</td>
                             <td>{volume}</td>
-                            <td>{marketCap}</td>
                           </tr>
                         );
                       }
@@ -135,7 +148,6 @@ function Trending() {
                 <th>Change</th>
                 <th>% Change</th>
                 <th>Volume</th>
-                <th>Market Cap</th>
               </thead>
               <tbody>
                 {twitter ? (
@@ -143,21 +155,21 @@ function Trending() {
                     .slice(0, 14)
                     .map(
                       ({
+                        symbol,
                         company,
                         price,
                         change,
-                        changePercent,
+                        changePercentage,
                         volume,
-                        marketCap,
                       }) => {
                         return (
                           <tr>
+                            <td>{symbol}</td>
                             <td>{company}</td>
                             <td>{price}</td>
                             <td>{change}</td>
-                            <td>{changePercent}</td>
+                            <td>{changePercentage}</td>
                             <td>{volume}</td>
-                            <td>{marketCap}</td>
                           </tr>
                         );
                       }
@@ -181,7 +193,6 @@ function Trending() {
                 <th>Change</th>
                 <th>% Change</th>
                 <th>Volume</th>
-                <th>Market Cap</th>
               </thead>
               <tbody>
                 {stocktwits ? (
@@ -189,21 +200,21 @@ function Trending() {
                     .slice(0, 14)
                     .map(
                       ({
+                        symbol,
                         company,
                         price,
                         change,
-                        changePercent,
+                        changePercentage,
                         volume,
-                        marketCap,
                       }) => {
                         return (
                           <tr>
+                            <td>{symbol}</td>
                             <td>{company}</td>
                             <td>{price}</td>
                             <td>{change}</td>
-                            <td>{changePercent}</td>
+                            <td>{changePercentage}</td>
                             <td>{volume}</td>
-                            <td>{marketCap}</td>
                           </tr>
                         );
                       }
