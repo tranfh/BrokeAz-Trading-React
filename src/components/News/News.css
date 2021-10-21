@@ -1,0 +1,12 @@
+.newsDetails {
+  font-size: small;
+}
+
+.newsfeed {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.font {
+  color: white;
+}

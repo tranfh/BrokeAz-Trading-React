@@ -44,38 +44,34 @@ class StockChart extends Component {
       .then((data) => {
         if (!data.body['Error Message']) {
           this.setState({ metadata: data.body['Meta Data'] });
-          this.setState({ timeSeries: data.body['Time Series (Daily)'] });
-          this.getStockData(this.state.timeSeries);
+          let timeSeries = data.body['Time Series (Intraday)'];
+          let result = [];
+          for (const time in timeSeries) {
+            result.push([
+              time,
+              [
+                timeSeries[time]['1. open'],
+                timeSeries[time]['2. high'],
+                timeSeries[time]['3. low'],
+                timeSeries[time]['4. close'],
+              ],
+            ]);
+          }
+          this.setState({
+            series: [{ data: result }],
+          });
         }
       });
   };
-
   onSearchChange = (event) => {
     this.setState({ searchField: event.target.value });
   };
 
-  getStockData = (timeSeries) => {
-    let result = [];
-    for (const time in timeSeries) {
-      result.push([
-        time,
-        [
-          timeSeries[time]['1. open'],
-          timeSeries[time]['2. high'],
-          timeSeries[time]['3. low'],
-          timeSeries[time]['4. close'],
-        ],
-      ]);
-    }
-    this.setState({ candleDetails: result });
-  };
-
   onSearchTicker = (target) => {
     if (target.charCode === 13) {
-      const { searchField, candleDetails } = this.state;
+      const { searchField } = this.state;
       if (searchField !== '') {
         this.retrieveChartData(searchField);
-        this.setState({ series: [{ data: candleDetails }] });
       }
     }
   };

@@ -1,8 +1,11 @@
 import './App.css';
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
-import StockChart from './components/Chart/StockChart';
-import FinancialDetails from './components/FinancialDetails/FinancialDetails';
+// import StockChart from './components/Chart/StockChart';
+import Futures from './components/Futures/Futures';
+import News from './components/News/News';
+import Trending from './components/Trending/Trending';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -11,12 +14,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App flex">
+      <div className="App bg-dark">
         <Navigation />
-        <div className="flex">
-          <StockChart />
-          <FinancialDetails />
-        </div>
+        <Futures />
+        <Trending />
+        <News />
       </div>
     );
   }
