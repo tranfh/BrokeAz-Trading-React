@@ -6,66 +6,77 @@ function Trending() {
   const [reddit, setReddit] = useState([]);
   const [stocktwits, setStockTwits] = useState([]);
   const [twitter, setTwitter] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTrending = async (fintwit) => {
-      return await fetch(`http://localhost:3000/trending/${fintwit}`, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.length > 0) {
-            switch (fintwit) {
-              case 'stocktwits':
-                getStockData(data).then((response) => setStockTwits(response));
-                break;
-              case 'reddit':
-                getStockData(data).then((response) => setReddit(response));
-                break;
-              case 'twitter':
-                getStockData(data).then((response) => setTwitter(response));
-                break;
-              default:
-                getStockData(data).then((response) => setReddit(response));
-                break;
-            }
-          }
-        });
-    };
-
-    const getStockData = (array) => {
-      let tempArray = [];
-      for (let i = 0; i < array.length; i++) {
-        return fetch(`http://localhost:3000/quote/${array[i]}`, {
+      const response = await fetch(
+        `http://localhost:3000/trending/${fintwit}`,
+        {
           method: 'get',
           headers: { 'Content-Type': 'application/json' },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            let obj = {};
-            obj['symbol'] = array[i];
-            obj['company'] = data['Global Quote']['01. symbol'];
-            obj['price'] = data['Global Quote']['05. price'];
-            obj['change'] = data['Global Quote']['09. change'];
-            obj['changePercentage'] =
-              data['Global Quote']['10. change percent'];
-            obj['volume'] = data['Global Quote']['06. volume'];
-            console.log(obj);
-            tempArray.push(obj);
-            console.log(tempArray);
-          });
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Couldn't Fetch Trending ${response.status}`);
+      }
+      const data = await response.json();
+      const array = await getStockData(data);
+      if (fintwit === 'stocktwits') {
+        setStockTwits(array);
+      } else if (fintwit === 'reddit') {
+        setReddit(array);
+      } else {
+        setTwitter(array);
+      }
+      return true;
+    };
+
+    const getStockData = async (array) => {
+      console.log(array);
+      let tempArray = [];
+      for (let i = 0; i < array.length; i++) {
+        let obj = {};
+        let response = await fetch(`http://localhost:3000/quote/${array[i]}`, {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.ok) {
+          throw new Error(`Couldn't Fetch Stock Data ${response.status}`);
+        }
+        let data = await response.json();
+        console.log(data);
+        if (data) {
+          obj['symbol'] = array[i];
+          obj['company'] = data['Global Quote']['01. symbol'];
+          obj['price'] = data['Global Quote']['05. price'];
+          obj['change'] = data['Global Quote']['09. change'];
+          obj['changePercentage'] = data['Global Quote']['10. change percent'];
+          obj['volume'] = data['Global Quote']['06. volume'];
+        } else {
+          obj['symbol'] = array[i];
+          obj['company'] = '';
+          obj['price'] = 0;
+          obj['change'] = 0;
+          obj['changePercentage'] = 0;
+          obj['volume'] = 0;
+        }
+        tempArray.push(obj);
       }
       return tempArray;
     };
 
-    // getTrending('stocktwits')
-    //   .then(getStockData(stocktwits))
-    //   .then((data) => setStockTwits(data));
-    getTrending('reddit');
-    // getTrending('twitter')
-    //   .then(getStockData(twitter))
-    //   .then((data) => setTwitter(data));
+    const triggerLoad = () => {
+      if (
+        getTrending('stocktwits') &
+        getTrending('reddit') &
+        getTrending('twitter')
+      ) {
+        setLoading(false);
+      }
+    };
+
+    triggerLoad();
   }, []);
 
   const getState = (fintwit) => {
@@ -87,150 +98,198 @@ function Trending() {
           Trending Tickers
         </h4>
       </div>
-      <div>
-        <Tabs
-          defaultActiveKey="Reddit"
-          id="fintwit-tabs"
-          onSelect={(k) => getState(k)}
-          className="mb-3"
-        >
-          <Tab eventKey="reddit" title="Reddit">
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Last Price</th>
-                <th>Change</th>
-                <th>% Change</th>
-                <th>Volume</th>
-              </thead>
-              <tbody>
-                {reddit ? (
-                  reddit
-                    .slice(0, 14)
-                    .map(
-                      ({
-                        symbol,
-                        company,
-                        price,
-                        change,
-                        changePercentage,
-                        volume,
-                      }) => {
-                        return (
-                          <tr>
-                            <td>{symbol}</td>
-                            <td>{company}</td>
-                            <td>{price}</td>
-                            <td>{change}</td>
-                            <td>{changePercentage}</td>
-                            <td>{volume}</td>
-                          </tr>
-                        );
-                      }
-                    )
-                ) : (
+      {isLoading ? (
+        <div>
+          <Tabs
+            defaultActiveKey="Reddit"
+            id="fintwit-tabs"
+            onSelect={(k) => getState(k)}
+            className="mb-3"
+          >
+            <Tab eventKey="reddit" title="Reddit">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
                   <tr>
-                    <td>
-                      <DisappearedLoading />
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                )}
-              </tbody>
-            </Table>
-          </Tab>
-          <Tab eventKey="twitter" title="Twitter">
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Last Price</th>
-                <th>Change</th>
-                <th>% Change</th>
-                <th>Volume</th>
-              </thead>
-              <tbody>
-                {twitter ? (
-                  twitter
-                    .slice(0, 14)
-                    .map(
-                      ({
-                        symbol,
-                        company,
-                        price,
-                        change,
-                        changePercentage,
-                        volume,
-                      }) => {
-                        return (
-                          <tr>
-                            <td>{symbol}</td>
-                            <td>{company}</td>
-                            <td>{price}</td>
-                            <td>{change}</td>
-                            <td>{changePercentage}</td>
-                            <td>{volume}</td>
-                          </tr>
-                        );
-                      }
-                    )
-                ) : (
+                </tbody>
+              </Table>
+            </Tab>
+            <Tab eventKey="twitter" title="Twitter">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
                   <tr>
-                    <td>
-                      <DisappearedLoading />
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                )}
-              </tbody>
-            </Table>
-          </Tab>
-          <Tab eventKey="stocktwits" title="StockTwits">
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Last Price</th>
-                <th>Change</th>
-                <th>% Change</th>
-                <th>Volume</th>
-              </thead>
-              <tbody>
-                {stocktwits ? (
-                  stocktwits
-                    .slice(0, 14)
-                    .map(
-                      ({
-                        symbol,
-                        company,
-                        price,
-                        change,
-                        changePercentage,
-                        volume,
-                      }) => {
-                        return (
-                          <tr>
-                            <td>{symbol}</td>
-                            <td>{company}</td>
-                            <td>{price}</td>
-                            <td>{change}</td>
-                            <td>{changePercentage}</td>
-                            <td>{volume}</td>
-                          </tr>
-                        );
-                      }
-                    )
-                ) : (
+                </tbody>
+              </Table>
+            </Tab>
+            <Tab eventKey="stocktwits" title="StockTwits">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
                   <tr>
-                    <td>
-                      <DisappearedLoading />
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                )}
-              </tbody>
-            </Table>
-          </Tab>
-        </Tabs>
-      </div>
+                </tbody>
+              </Table>
+            </Tab>
+          </Tabs>
+        </div>
+      ) : (
+        <div>
+          <Tabs
+            defaultActiveKey="Reddit"
+            id="fintwit-tabs"
+            onSelect={(k) => getState(k)}
+            className="mb-3"
+          >
+            <Tab eventKey="reddit" title="Reddit">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
+                  {reddit.map(
+                    ({
+                      symbol,
+                      company,
+                      price,
+                      change,
+                      changePercentage,
+                      volume,
+                    }) => {
+                      return (
+                        <tr>
+                          <td>{symbol}</td>
+                          <td>{company}</td>
+                          <td>{price}</td>
+                          <td>{change}</td>
+                          <td>{changePercentage}</td>
+                          <td>{volume}</td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </tbody>
+              </Table>
+            </Tab>
+            <Tab eventKey="twitter" title="Twitter">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
+                  {twitter.map(
+                    ({
+                      symbol,
+                      company,
+                      price,
+                      change,
+                      changePercentage,
+                      volume,
+                    }) => {
+                      return (
+                        <tr>
+                          <td>{symbol}</td>
+                          <td>{company}</td>
+                          <td>{price}</td>
+                          <td>{change}</td>
+                          <td>{changePercentage}</td>
+                          <td>{volume}</td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </tbody>
+              </Table>
+            </Tab>
+            <Tab eventKey="stocktwits" title="StockTwits">
+              <Table striped bordered hover variant="dark" size="sm">
+                <thead>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Last Price</th>
+                  <th>Change</th>
+                  <th>% Change</th>
+                  <th>Volume</th>
+                </thead>
+                <tbody>
+                  {stocktwits.map(
+                    ({
+                      symbol,
+                      company,
+                      price,
+                      change,
+                      changePercentage,
+                      volume,
+                    }) => {
+                      return (
+                        <tr>
+                          <td>{symbol}</td>
+                          <td>{company}</td>
+                          <td>{price}</td>
+                          <td>{change}</td>
+                          <td>{changePercentage}</td>
+                          <td>{volume}</td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </tbody>
+              </Table>
+            </Tab>
+          </Tabs>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import './Movers.css';
 
-function Movers() {
-  const [gainers, setGainers] = useState([]);
-  const [losers, setLosers] = useState([]);
+function Actives() {
+  const [smallCaps, setSmallCaps] = useState([]);
+  const [mostActives, setMostActive] = useState([]);
   return (
-    <div className="flex justify-center pa3 mh7 mv1 movers">
-      <div className="pa2 ma2 w-50 gainers">
-        <h3 className="gainers">
-          Today's Gainers<span class="shade">&nbsp;</span>
-        </h3>
+    <div className="flex justify-center pa3 mh7 mv1">
+      <div className="pa2 ma2 w-50">
+        <h4 className="font">Most Active</h4>
 
         <Table striped bordered hover variant="dark" size="sm">
           <thead>
@@ -19,7 +16,7 @@ function Movers() {
             <th>% Change</th>
           </thead>
           <tbody>
-            {gainers.map(({ symbol, price, changePercentage }) => {
+            {mostActives.map(({ symbol, price, changePercentage }) => {
               return (
                 <tr>
                   <td>{symbol}</td>
@@ -32,9 +29,7 @@ function Movers() {
         </Table>
       </div>
       <div className="pa2 ma2 w-50">
-        <h3 className="losers">
-          Today's Losers<span class="shade">&nbsp;</span>
-        </h3>
+        <h4 className="font">Small Cap Gainers</h4>
         <Table striped bordered hover variant="dark" size="sm">
           <thead>
             <th>Symbol</th>
@@ -42,7 +37,7 @@ function Movers() {
             <th>% Change</th>
           </thead>
           <tbody>
-            {losers.map(({ symbol, price, changePercentage }) => {
+            {smallCaps.map(({ symbol, price, changePercentage }) => {
               return (
                 <tr>
                   <td>{symbol}</td>
@@ -58,4 +53,4 @@ function Movers() {
   );
 }
 
-export default Movers;
+export default Actives;
