@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, Table } from 'react-bootstrap';
-import { DisappearedLoading } from 'react-loadingg';
+import { Table } from 'react-bootstrap';
 
 function Trending() {
   const [reddit, setReddit] = useState([]);
@@ -43,42 +42,33 @@ function Trending() {
     return true;
   };
 
-  const getStockData = async (array) => {
-    console.log(array);
-    let tempArray = [];
-    for (let i = 0; i < 5; i++) {
-      let obj = {};
-      let response = await fetch(`http://localhost:3000/quote/${array[i]}`, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (!response.ok) {
-        throw new Error(`Couldn't Fetch Stock Data ${response.status}`);
-      }
-      let data = await response.json();
-      console.log(data);
-      if (data['Global Quote']) {
-        obj['symbol'] = array[i];
-        obj['company'] = data['Global Quote']['01. symbol'];
-        obj['price'] = data['Global Quote']['05. price'];
-        obj['change'] = data['Global Quote']['09. change'];
-        obj['changePercentage'] = data['Global Quote']['10. change percent'];
-        obj['volume'] = data['Global Quote']['06. volume'];
-      }
-      tempArray.push(obj);
-    }
-    return tempArray;
-  };
+  // const getStockData = async (array) => {
+  //   console.log(array);
+  //   let tempArray = [];
+  //   for (let i = 0; i < 5; i++) {
+  //     let obj = {};
+  //     let response = await fetch(`http://localhost:3000/quote/${array[i]}`, {
+  //       method: 'get',
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`Couldn't Fetch Stock Data ${response.status}`);
+  //     }
+  //     let data = await response.json();
+  //     console.log(data);
+  //     if (data['Global Quote']) {
+  //       obj['symbol'] = array[i];
+  //       obj['company'] = data['Global Quote']['01. symbol'];
+  //       obj['price'] = data['Global Quote']['05. price'];
+  //       obj['change'] = data['Global Quote']['09. change'];
+  //       obj['changePercentage'] = data['Global Quote']['10. change percent'];
+  //       obj['volume'] = data['Global Quote']['06. volume'];
+  //     }
+  //     tempArray.push(obj);
+  //   }
+  //   return tempArray;
+  // };};
 
-  const getState = (fintwit) => {
-    if (fintwit === 'stocktwits') {
-      getTrending('stocktwits');
-    } else if (fintwit === 'reddit') {
-      getTrending('reddit');
-    } else {
-      getTrending('twitter');
-    }
-  };
   return (
     <div className="pa3 mh7 mv1">
       <div>

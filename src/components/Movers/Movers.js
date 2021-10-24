@@ -5,8 +5,37 @@ import './Movers.css';
 function Movers() {
   const [gainers, setGainers] = useState([]);
   const [losers, setLosers] = useState([]);
+
+  useEffect(() => {
+    const getGainers = async () => {
+      const response = await fetch('http://localhost:3000/gainers', {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) {
+        throw new Error(`Couldn't Fetch Gainers ${response.status}`);
+      }
+      const data = await response.json();
+      setGainers(data.body.mostGainerStock.slice(0, 5));
+    };
+
+    const getLosers = async () => {
+      const response = await fetch('http://localhost:3000/losers', {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) {
+        throw new Error(`Couldn't Fetch Losers ${response.status}`);
+      }
+      const data = await response.json();
+      setLosers(data.body.mostLoserStock.slice(0, 5));
+    };
+    getGainers();
+    getLosers();
+  }, []);
+
   return (
-    <div className="flex justify-center pa3 mh7 mv1 movers">
+    <div className="flex justify-center mh7 mv1 movers">
       <div className="pa2 ma2 w-50 gainers">
         <h3 className="gainers">
           Today's Gainers<span class="shade">&nbsp;</span>
@@ -16,15 +45,17 @@ function Movers() {
           <thead>
             <th>Symbol</th>
             <th>Last Price</th>
+            <th>Change</th>
             <th>% Change</th>
           </thead>
           <tbody>
-            {gainers.map(({ symbol, price, changePercentage }) => {
+            {gainers.map(({ ticker, price, changes, changesPercentage }) => {
               return (
                 <tr>
-                  <td>{symbol}</td>
+                  <td>{ticker}</td>
                   <td>{price}</td>
-                  <td>{changePercentage}</td>
+                  <td>{changes}</td>
+                  <td>{changesPercentage}</td>
                 </tr>
               );
             })}
@@ -39,15 +70,17 @@ function Movers() {
           <thead>
             <th>Symbol</th>
             <th>Last Price</th>
+            <th>Change</th>
             <th>% Change</th>
           </thead>
           <tbody>
-            {losers.map(({ symbol, price, changePercentage }) => {
+            {losers.map(({ ticker, price, changes, changesPercentage }) => {
               return (
                 <tr>
-                  <td>{symbol}</td>
+                  <td>{ticker}</td>
                   <td>{price}</td>
-                  <td>{changePercentage}</td>
+                  <td>{changes}</td>
+                  <td>{changesPercentage}</td>
                 </tr>
               );
             })}

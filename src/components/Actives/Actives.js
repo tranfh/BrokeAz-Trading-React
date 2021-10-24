@@ -2,50 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 
 function Actives() {
-  const [smallCaps, setSmallCaps] = useState([]);
   const [mostActives, setMostActive] = useState([]);
+
+  useEffect(() => {
+    const getActives = async () => {
+      const response = await fetch('http://localhost:3000/mostactives', {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) {
+        throw new Error(`Couldn't Fetch Losers ${response.status}`);
+      }
+      const data = await response.json();
+      setMostActive(data.body.slice(0, 5));
+    };
+    getActives();
+  }, []);
   return (
-    <div className="flex justify-center pa3 mh7 mv1">
-      <div className="pa2 ma2 w-50">
+    <div className="flex justify-center mh7">
+      <div className="pa2 ma2 w-100">
         <h4 className="font">Most Active</h4>
 
         <Table striped bordered hover variant="dark" size="sm">
           <thead>
             <th>Symbol</th>
+            <th>Name</th>
             <th>Last Price</th>
+            <th>Change</th>
             <th>% Change</th>
           </thead>
           <tbody>
-            {mostActives.map(({ symbol, price, changePercentage }) => {
-              return (
-                <tr>
-                  <td>{symbol}</td>
-                  <td>{price}</td>
-                  <td>{changePercentage}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      </div>
-      <div className="pa2 ma2 w-50">
-        <h4 className="font">Small Cap Gainers</h4>
-        <Table striped bordered hover variant="dark" size="sm">
-          <thead>
-            <th>Symbol</th>
-            <th>Last Price</th>
-            <th>% Change</th>
-          </thead>
-          <tbody>
-            {smallCaps.map(({ symbol, price, changePercentage }) => {
-              return (
-                <tr>
-                  <td>{symbol}</td>
-                  <td>{price}</td>
-                  <td>{changePercentage}</td>
-                </tr>
-              );
-            })}
+            {mostActives.map(
+              ({ ticker, companyName, price, changes, changesPercentage }) => {
+                return (
+                  <tr>
+                    <td>{ticker}</td>
+                    <td>{companyName}</td>
+                    <td>{price}</td>
+                    <td>{changes}</td>
+                    <td>{changesPercentage}</td>
+                  </tr>
+                );
+              }
+            )}
           </tbody>
         </Table>
       </div>
