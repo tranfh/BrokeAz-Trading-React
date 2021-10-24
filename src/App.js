@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Movers from './components/Movers/Movers';
 import Futures from './components/Futures/Futures';
@@ -9,6 +9,9 @@ import Actives from './components/Actives/Actives';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
+  useEffect(() => {
+    document.title = 'BrokeAz-Trading Dashboard';
+  });
   return (
     <div className="App bg-dark">
       <Navigation />
