@@ -15,6 +15,8 @@ The database has not been built as it currently isnt require because the backend
 
 The dashboard is a tool used to just help provide daily market informations including: news, most actives and daily gainers/losers.
 
+Using multiple API calls, we're able to webscrape Twitter, Reddit and Stocktwits to also provide the most trending stocks as well!
+
 ## Installation
 
 Download the repo to your local desktop
