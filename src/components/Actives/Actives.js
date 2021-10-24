@@ -6,10 +6,13 @@ function Actives() {
 
   useEffect(() => {
     const getActives = async () => {
-      const response = await fetch('http://localhost:3000/mostactives', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await fetch(
+        'https://enigmatic-brook-28051.herokuapp.com/mostactives',
+        {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Couldn't Fetch Losers ${response.status}`);
       }

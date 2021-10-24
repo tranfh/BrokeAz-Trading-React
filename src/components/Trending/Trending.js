@@ -22,10 +22,13 @@ function Trending() {
 
   const getTrending = async (fintwit) => {
     // check database if the the latest time is within 15mins
-    const response = await fetch(`http://localhost:3000/trending/${fintwit}`, {
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const response = await fetch(
+      `https://enigmatic-brook-28051.herokuapp.com/trending/${fintwit}`,
+      {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
     if (!response.ok) {
       throw new Error(`Couldn't Fetch Trending ${response.status}`);
     }
@@ -47,7 +50,7 @@ function Trending() {
   //   let tempArray = [];
   //   for (let i = 0; i < 5; i++) {
   //     let obj = {};
-  //     let response = await fetch(`http://localhost:3000/quote/${array[i]}`, {
+  //     let response = await fetch(`https://enigmatic-brook-28051.herokuapp.com/quote/${array[i]}`, {
   //       method: 'get',
   //       headers: { 'Content-Type': 'application/json' },
   //     });

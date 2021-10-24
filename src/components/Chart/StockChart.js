@@ -36,7 +36,7 @@ class StockChart extends Component {
 
   retrieveChartData = (ticker) => {
     console.log('starting fetch');
-    return fetch(`http://localhost:3000/chart/daily/${ticker}`, {
+    return fetch(`https://enigmatic-brook-28051.herokuapp.com/${ticker}`, {
       method: 'get',
       headers: { 'Content-Type': 'application/json' },
     })

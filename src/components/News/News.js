@@ -11,7 +11,7 @@ function News() {
 
   const getNews = (ticker = '') => {
     console.log('Retrieving News...');
-    return fetch(`http://localhost:3000/news/${ticker}`, {
+    return fetch(`https://enigmatic-brook-28051.herokuapp.com/news/${ticker}`, {
       method: 'get',
       headers: { 'Content-Type': 'application/json' },
     })

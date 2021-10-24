@@ -8,10 +8,13 @@ function Movers() {
 
   useEffect(() => {
     const getGainers = async () => {
-      const response = await fetch('http://localhost:3000/gainers', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await fetch(
+        'https://enigmatic-brook-28051.herokuapp.com/gainers',
+        {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Couldn't Fetch Gainers ${response.status}`);
       }
@@ -20,10 +23,13 @@ function Movers() {
     };
 
     const getLosers = async () => {
-      const response = await fetch('http://localhost:3000/losers', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await fetch(
+        'https://enigmatic-brook-28051.herokuapp.com/losers',
+        {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Couldn't Fetch Losers ${response.status}`);
       }
