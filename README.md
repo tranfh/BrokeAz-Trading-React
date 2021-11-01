@@ -5,6 +5,8 @@ Demo : https://brokeaz-trading.herokuapp.com/
 ### Note:
 The website isnt exactly mobile friendly. For best results please open via webbrowser
 
+On initial load due to the nature of the free subscription to Heroku, the server is shutdown when idle so it may take time to load.
+
 ## Introduction
 
 This is a Full Stack project that uses the PERN/MERN(?) stack.
