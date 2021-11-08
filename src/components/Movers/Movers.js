@@ -19,7 +19,10 @@ function Movers() {
         throw new Error(`Couldn't Fetch Gainers ${response.status}`);
       }
       const data = await response.json();
-      setGainers(data.body.mostGainerStock.slice(0, 5));
+      console.log(data);
+      if (!data.body['Error Message']) {
+        setGainers(data.body.mostGainerStock.slice(0, 5));
+      }
     };
 
     const getLosers = async () => {
@@ -34,7 +37,9 @@ function Movers() {
         throw new Error(`Couldn't Fetch Losers ${response.status}`);
       }
       const data = await response.json();
-      setLosers(data.body.mostLoserStock.slice(0, 5));
+      if (!data.body['Error Message']) {
+        setLosers(data.body.mostLoserStock.slice(0, 5));
+      }
     };
     getGainers();
     getLosers();
