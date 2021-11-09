@@ -3,9 +3,9 @@
 Demo : https://brokeaz-trading.herokuapp.com/
 
 ### Note:
-The website isnt exactly mobile friendly. For best results please open via webbrowser
+For best viewing results please open via a web browser.
 
-On initial load due to the nature of the free subscription to Heroku, the server is shutdown when idle so it may take time to load.
+On initial load due to the nature of the free subscription to Heroku, the server is shutdown when idle so it may take time to load. 
 
 ## Introduction
 
@@ -30,3 +30,23 @@ This will install all the dependencies
 Then simply npm start.
 
 The frontend is reliant on the backend so please be sure to run the backend first.
+
+
+## Features
+
+- [x] News
+- [x] Insider Info
+- [x] Foreign Exchange Rates
+- [x] Daily Gainers/Losers
+- [x] Fintwit Trendings 
+
+## Additional Comments
+
+Next Steps:
+- [ ] Futures (A page that lists all futures and commodities pricing)
+- [ ] Crypto (A page that will list all the major cryptocurrencies)
+- [ ] Charts (Interactive Chart for a specified stock)
+- [ ] Stock Finanical Details (Provide more insight on a company)
+- [ ] Login/Registration (database required)
+- [ ] Database (Start logging and storing collected data from trending fintwits to provide a longer scope)
+- [ ] Watchlist
