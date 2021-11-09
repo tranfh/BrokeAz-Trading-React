@@ -1,3 +1,8 @@
+.news {
+  margin-left: 16em;
+  margin-right: 16em;
+}
+
 .newsDetails {
   font-size: small;
 }
@@ -9,4 +14,11 @@
 
 .font {
   color: white;
+}
+
+@media screen and (max-width: 1000px) {
+  .news {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
 }

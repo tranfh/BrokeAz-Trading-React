@@ -63,7 +63,7 @@ function News() {
 
   return (
     <div>
-      <div className="pa3 mh7 mv1" id="news">
+      <div className="news">
         {loading ? (
           <Loading />
         ) : (

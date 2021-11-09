@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import './Actives.css';
 
 function Actives() {
   const [mostActives, setMostActive] = useState([]);
@@ -22,10 +23,9 @@ function Actives() {
     getActives();
   }, []);
   return (
-    <div className="flex justify-center mh7">
-      <div className="pa2 ma2 w-100">
-        <h4 className="font">Most Active</h4>
-
+    <div>
+      <h4 className="font">Most Active</h4>
+      <div className="active-movers">
         <Table striped bordered hover variant="dark" size="sm">
           <thead>
             <th>Symbol</th>

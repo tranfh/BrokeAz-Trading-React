@@ -1,0 +1,13 @@
+.active-movers {
+  display: flex;
+  justify-content: center;
+  margin-right: 16em;
+  margin-left: 16em;
+}
+
+@media screen and (max-width: 1000px) {
+  .news {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+}
