@@ -17,7 +17,7 @@ function Actives() {
         throw new Error(`Couldn't Fetch Losers ${response.status}`);
       }
       const data = await response.json();
-      setMostActive(data.body.slice(0, 5));
+      setMostActive(data.body.slice(0, 10));
     };
     getActives();
   }, []);
