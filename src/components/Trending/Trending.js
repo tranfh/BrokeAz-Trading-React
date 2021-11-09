@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import Loading from '../Loading/Loading';
+import './Trending.css';
 
 function Trending() {
   const [reddit, setReddit] = useState([]);
@@ -76,10 +77,7 @@ function Trending() {
   return (
     <div className="pa3 mh7 mv1">
       <div>
-        <h4
-          style={{ textAlign: 'center', color: '#cdcbcb' }}
-          className="font trending"
-        >
+        <h4 style={{ textAlign: 'center', color: '#cdcbcb' }} className="font">
           Trending Tickers
         </h4>
       </div>
@@ -125,7 +123,7 @@ function Trending() {
           </Table>
         </div>
       ) : (
-        <div className="flex justify-center">
+        <div className="trending">
           <Table striped bordered hover variant="dark" size="sm">
             <thead>
               <th>Reddit</th>

@@ -51,7 +51,7 @@ function Movers() {
   }, []);
 
   return (
-    <div className="flex justify-center mh7 mv1 movers">
+    <div className="movers">
       <div className="pa2 ma2 w-50 gainers">
         <h3 className="gainers">
           Today's Gainers<span class="shade">&nbsp;</span>
