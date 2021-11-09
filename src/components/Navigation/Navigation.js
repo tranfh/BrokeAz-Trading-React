@@ -20,13 +20,7 @@ function Navigation() {
                 <Link to="/insiders">Insiders</Link>
               </Nav.Link>
               <Nav.Link href="#link">
-                <Link to="/#futures">Futures</Link>
-              </Nav.Link>
-              <Nav.Link href="#link">
-                <Link to="/#forex">Forex</Link>
-              </Nav.Link>
-              <Nav.Link href="#link">
-                <Link to="/#crypto">Crypto</Link>
+                <Link to="/forex">Forex</Link>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

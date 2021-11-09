@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Insiders from './components/Insiders/Insiders';
 import Navigation from './components/Navigation/Navigation';
+import Forex from './components/Forex/Forex';
 import News from './components/News/News';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -15,6 +16,15 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />}></Route>
       <Route path="/insiders" element={<Insiders />}></Route>
+      <Route
+        path="/forex"
+        element={
+          <>
+            <Navigation />
+            <Forex />
+          </>
+        }
+      ></Route>
       <Route
         path="/news"
         element={
