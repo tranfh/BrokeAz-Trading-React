@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import Loading from '../Loading/Loading';
 
 function Trending() {
   const [reddit, setReddit] = useState([]);
@@ -90,7 +91,10 @@ function Trending() {
             </thead>
             <tbody>
               <tr>
-                <td></td>
+                <td>
+                  {' '}
+                  <Loading />
+                </td>
               </tr>
             </tbody>
           </Table>
@@ -100,7 +104,10 @@ function Trending() {
             </thead>
             <tbody>
               <tr>
-                <td></td>
+                <td>
+                  {' '}
+                  <Loading />
+                </td>
               </tr>
             </tbody>
           </Table>
@@ -110,7 +117,9 @@ function Trending() {
             </thead>
             <tbody>
               <tr>
-                <td></td>
+                <td>
+                  <Loading />
+                </td>
               </tr>
             </tbody>
           </Table>
