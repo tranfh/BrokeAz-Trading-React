@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tranfh/BrokeAz-Trading-React">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">BrokeAz-Trading-Dashboard</h3>
@@ -21,7 +21,7 @@
   <p align="center">
     An awesome Trading Dashboard to help you keep up to date with the market!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/tranfh/BrokeAz-Trading-React#readme"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://brokeaz-trading.herokuapp.com/">View Demo</a>
@@ -51,7 +51,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -65,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![BrokeAz-Trading Screen Shot][product-screenshot]]
 
 This dashboard is a great addition to your trading arsenal! 
 
@@ -152,7 +151,7 @@ Place the keys in the .env file within the Backend Server source folder
 - [ ] Database (Start logging and storing collected data from trending fintwits to provide a longer scope)
 - [ ] Watchlist
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/tranfh/BrokeAz-Trading-React/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -215,16 +214,14 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[contributors-shield]: https://img.shields.io/github/contributors/tranfh/BrokeAz-Trading-React.svg?style=for-the-badge
+[contributors-url]: https://github.com/tranfh/BrokeAz-Trading-React/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/tranfh/BrokeAz-Trading-React.svg?style=for-the-badge
+[forks-url]: https://github.com/tranfh/BrokeAz-Trading-React/network/members
+[stars-shield]: https://img.shields.io/github/stars/tranfh/BrokeAz-Trading-React.svg?style=for-the-badge
+[stars-url]: https://github.com/tranfh/BrokeAz-Trading-React/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[issues-url]: https://github.com/tranfh/BrokeAz-Trading-React/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/frank-h-tran
+[product-screenshot]: public/screenshot.png
