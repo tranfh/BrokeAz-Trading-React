@@ -162,7 +162,8 @@ See the [open issues](https://github.com/tranfh/BrokeAz-Trading-React/issues) fo
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo and create a pull request. 
+You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
@@ -188,16 +189,17 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Frank Tran - [Linkedin](https://www.linkedin.com/in/frank-h-tran) - frank.tran@live.ca
+
 Project Link - client: [BrokeAz-Trading-React](https://github.com/tranfh/BrokeAz-Trading-React)
+
 Project Link - server: [BrokeAz-Trading-React](https://github.com/tranfh/BrokeAz-Trading-React-Api/)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
